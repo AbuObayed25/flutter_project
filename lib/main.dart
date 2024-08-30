@@ -5,7 +5,7 @@ void main() {
   runApp(
     DevicePreview(
       enabled: true,
-      builder: (context) => MyApp(), // Wrap your app
+      builder: (context) => const MyApp(), // Wrap your app
     ),
   );
 }
@@ -16,68 +16,75 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: Home(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        )
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.orange
+          ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.orange,
+            foregroundColor: Colors.white,
+          )
+      ),
+      themeMode: ThemeMode.system,
+      home:  Home(),
     );
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Home extends StatefulWidget {
+  //const Home({super.key});
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+   int Counter=0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: Colors.blue,
+        title:const Text('Home'),
       ),
-      body: Column(
+      body: Center(
+        child:Text("$Counter",style: TextStyle(fontSize: 30),),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-      //     // Flexible(
-      //     //   flex: 6,
-      //     //   child: Container(
-      //     //     color: Colors.orange,
-      //     //     width: 230,
-      //     //   ),
-      //     // ),
-      //     // Flexible(
-      //     //   flex: 9,
-      //     //   child: Container(
-      //     //     color: Colors.pink,
-      //     //     width: 230,
-      //     //   ),
-      //     // ),
-      //     Expanded(     //[Flexible er tight are Expanded same]
-      //       child: Container(
-      //         color: Colors.brown,
-      //         width: 370,
-      //       ),
-      //     ),
-          Expanded(
-            child: Container(
-              color: Colors.yellow,
-              width: 370,
-            ),
-          ),
-          AspectRatio(
-            aspectRatio: 16 / 9, //  [generally amra ata nibo]
-            child: Container(
-              color: Colors.orange,
-            ),
-          ),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              return Text(constraints.maxWidth.toString());
+          FloatingActionButton(
+            onPressed: (){
+              Counter++;
+              setState(()    //re build er jonno setState() use kora lagbe
+              {
+              });
             },
-          )
+            child: const Icon(Icons.add),
+          ),
+         const SizedBox(height: 20),
+          FloatingActionButton(
+            onPressed: (){
+              Counter--;
+              setState(()    //re build er jonno setState() use kora lagbe
+              {
+              }
+              );
+            },child:const Icon(Icons.remove),
+          ),
         ],
-      )
-
+      ),
     );
   }
 }
