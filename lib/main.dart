@@ -36,18 +36,48 @@ class Home extends StatelessWidget {
         title: Text('Home'),
         backgroundColor: Colors.blue,
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: Colors.yellow,
-        child: FractionallySizedBox(
-          widthFactor: 0.5,
-          heightFactor: 0.5,
-          child: Container(
-            color: Colors.green,
+      body: Column(
+        children: [
+      //     // Flexible(
+      //     //   flex: 6,
+      //     //   child: Container(
+      //     //     color: Colors.orange,
+      //     //     width: 230,
+      //     //   ),
+      //     // ),
+      //     // Flexible(
+      //     //   flex: 9,
+      //     //   child: Container(
+      //     //     color: Colors.pink,
+      //     //     width: 230,
+      //     //   ),
+      //     // ),
+      //     Expanded(     //[Flexible er tight are Expanded same]
+      //       child: Container(
+      //         color: Colors.brown,
+      //         width: 370,
+      //       ),
+      //     ),
+          Expanded(
+            child: Container(
+              color: Colors.yellow,
+              width: 370,
+            ),
           ),
-        ),
-      ),
+          AspectRatio(
+            aspectRatio: 16 / 9, //  [generally amra ata nibo]
+            child: Container(
+              color: Colors.orange,
+            ),
+          ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return Text(constraints.maxWidth.toString());
+            },
+          )
+        ],
+      )
+
     );
   }
 }
