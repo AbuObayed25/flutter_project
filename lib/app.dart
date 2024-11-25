@@ -1,88 +1,58 @@
-// //1
-// import 'package:flutter/material.dart';
-//
-// // AppBar for the My Bag screen
-// var myBagAppBar = AppBar(
-//   backgroundColor: Colors.grey.shade300,
-//   title: const Text(
-//     'My Bag',
-//     style: TextStyle(
-//       fontSize: 32,
-//       fontWeight: FontWeight.w500,
-//     ),
-//   ),
-// );
-//
-// // Model class for a bag item
-// class BagItem {
-//   final String productImage;
-//   final String productTitle;
-//   final String color;
-//   final String size;
-//   final double price;
-//   int quantity;
-//
-//   BagItem({
-//     required this.productImage,
-//     required this.productTitle,
-//     required this.color,
-//     required this.size,
-//     required this.price,
-//     this.quantity = 1,
-//   });
-// }
 import 'package:flutter/material.dart';
+import 'package:practice_2/ui/screen/splash_screen.dart';
 
-// AppBar for the My Bag screen
-var myBagAppBar = AppBar(
-  backgroundColor: Colors.grey.shade300,
-  title: const Text(
-    'My Bag',
-    style: TextStyle(
-      fontSize: 32,
-      fontWeight: FontWeight.w500,
-    ),
-  ),
-);
+import 'ui/utility/app_Colors.dart';
 
-// Model class for a bag item
-class BagItem {
-  final String productImage;
-  final String productTitle;
-  final String color;
-  final String size;
-  final double price;
-  int quantity;
+class TaskManagerApp extends StatefulWidget {
+  const TaskManagerApp({super.key});
 
-  BagItem({
-    required this.productImage,
-    required this.productTitle,
-    required this.color,
-    required this.size,
-    required this.price,
-    this.quantity = 1,
-  });
+  static GlobalKey<NavigatorState> navigatorKey=GlobalKey<NavigatorState>();
+
+  @override
+  State<TaskManagerApp> createState() => _TaskManagerAppState();
 }
 
-// Main function that starts the Flutter app
-void main() {
-  runApp(const MyApp());
-}
-
-// Main widget that returns the app structure
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class _TaskManagerAppState extends State<TaskManagerApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: myBagAppBar,
-        body: const Center(
-          child: Text("Welcome to My Bag!"),
-        ),
+      debugShowCheckedModeBanner: false,
+      navigatorKey: TaskManagerApp.navigatorKey,
+      theme: ThemeData(
+        inputDecorationTheme: _inputDecorationTheme(),
+        elevatedButtonTheme:_elevatedButtonThemeData(),
       ),
+      home: SplashScreen(),
     );
   }
 }
 
+InputDecorationTheme _inputDecorationTheme() {
+  return InputDecorationTheme(
+    fillColor: Colors.white,
+    filled: true,
+    hintStyle: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    border: _InputBorder(),
+    enabledBorder: _InputBorder(),
+    errorBorder: _InputBorder(),
+    focusedBorder: _InputBorder(),
+  );
+}
+
+OutlineInputBorder _InputBorder() {
+  return OutlineInputBorder(
+      borderSide: BorderSide.none, borderRadius: BorderRadius.circular(8));
+}
+
+ElevatedButtonThemeData _elevatedButtonThemeData() {
+  return ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.themeColor,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        fixedSize: Size.fromWidth(double.maxFinite),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+  );
+}
