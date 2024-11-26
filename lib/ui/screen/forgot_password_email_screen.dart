@@ -14,6 +14,8 @@ class ForgotPasswordEmailAddress extends StatefulWidget {
 
 class _ForgotPasswordEmailAddressState
     extends State<ForgotPasswordEmailAddress> {
+  final TextEditingController _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme =

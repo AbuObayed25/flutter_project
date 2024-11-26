@@ -3,18 +3,20 @@ class UserModel {
   String? email;
   String? firstName;
   String? lastName;
-  String? mobile;
+  String? Phone;
   String? createdDate;
   String? photo;
+  String? Password;
 
   UserModel(
       {this.sId,
-        this.email,
-        this.firstName,
-        this.lastName,
-        this.mobile,
-        this.createdDate,
-        this.photo});
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.Phone,
+      //this.createdDate,
+      this.Password,
+      this.photo});
 
   String? get fullName => '${firstName ?? ''} ${lastName ?? ''}';
 
@@ -23,8 +25,9 @@ class UserModel {
     email = json['email'];
     firstName = json['firstName'];
     lastName = json['lastName'];
-    mobile = json['mobile'];
-    createdDate = json['createdDate'];
+    Phone = json['mobile'];
+    //createdDate = json['createdDate'];
+    Password = json['password'];
     photo = json['photo'];
   }
 
@@ -34,9 +37,12 @@ class UserModel {
     data['email'] = email;
     data['firstName'] = firstName;
     data['lastName'] = lastName;
-    data['mobile'] = mobile;
-    data['createdDate'] = createdDate;
+    data['mobile'] = Phone;
+    //data['createdDate'] = createdDate;
+    data['password'] = Password;
     data['photo'] = photo;
     return data;
   }
 }
+
+class Password {}
