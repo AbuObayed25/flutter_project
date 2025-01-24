@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:practice_2/data/models/login_model.dart';
 import 'package:practice_2/ui/controllers/auth_controller.dart';
+import 'package:practice_2/ui/controllers/sign_in_controller.dart';
 import 'package:practice_2/ui/screen/forgot_password_email_screen.dart';
 import 'package:practice_2/ui/screen/main_bottom_navbar_screen.dart';
 import 'package:practice_2/ui/utility/app_Colors.dart';
@@ -23,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
-  bool _inProgress = false;
+  final SignInController signInController = Get.find<SignInController>();
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +110,17 @@ class _SignInScreenState extends State<SignInScreen> {
           const SizedBox(
             height: 24,
           ),
-          Visibility(
-            visible: !_inProgress,
-            replacement: CircularProgressIndicator(),
-            child: ElevatedButton(
-              onPressed: _OnTapNextButton,
-              child: Icon(Icons.arrow_circle_right_outlined),
-            ),
+          GetBuilder<SignInController>(
+            builder: (controller) {
+              return Visibility(
+                visible: !controller.inProgress,
+                replacement: CircularProgressIndicator(),
+                child: ElevatedButton(
+                  onPressed: _OnTapNextButton,
+                  child: Icon(Icons.arrow_circle_right_outlined),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -159,34 +165,19 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<void> _signin() async {
-    _inProgress = true;
-    setState(() {});
-
-    Map<String, dynamic> requestBody = {
-      "email": _emailTEController.text.trim(),
-      "password": _passwordTEController.text,
-    };
-
-    NetworkResponse response = await NetworkCaller.postRequest(
-      url: Urls.login,
-      body: requestBody,
-    );
-
-    _inProgress = false;
-    setState(() {});
-    if (response.isSuccess) {
-      LoginModel loginModel = LoginModel.fromJson(response.responeseData);
-      await AuthController.saveAccessToken(loginModel.token!);
-      await AuthController.saveUserData(loginModel.data!);
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MainBottomNavbarScreen(),
-        ),
-            (value) => false,
-      );
+    final bool result = await signInController.signIn(
+        _emailTEController.text.trim(), _passwordTEController.text);
+    if (result) {
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => const MainBottomNavbarScreen(),
+      //   ),
+      //   (value) => false,
+      // );
+      Get.offAllNamed(MainBottomNavbarScreen.name);
     } else {
-      showSnackBarMessage(context, response.errorMessage, true);
+      showSnackBarMessage(context, signInController.errorMessage!, true);
     }
   }
 
