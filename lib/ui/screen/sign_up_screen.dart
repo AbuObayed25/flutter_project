@@ -11,6 +11,7 @@ import '../widgets/snack_bar_message.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+  static const String name='/signup-screen';
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:practice_2/data/models/network_response.dart';
 import 'package:practice_2/data/models/user_model.dart';
@@ -14,6 +15,7 @@ import 'package:practice_2/ui/widgets/tm_app_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+  static const String name='/profile-screen';
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -211,12 +213,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   );
 
   void _OnTapNextButton() {
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MainBottomNavbarScreen(),
-        ),
-            (value) => false);
+    Get.offAllNamed(MainBottomNavbarScreen.name);
   }
 
   String _getSelectedPhotoTitle() {

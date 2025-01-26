@@ -17,6 +17,8 @@ import 'sign_up_screen.dart';
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
+  static const String name = '/Signin-screen';
+
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
@@ -128,12 +130,13 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _OnTapForgotPasswordButton() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ForgotPasswordEmailAddress(),
-      ),
-    );
+    Navigator.pushReplacementNamed(context, ForgotPasswordEmailAddress.name);
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => const ForgotPasswordEmailAddress(),
+    //   ),
+    // );
   }
 
   Widget _buildSignUpSection() {
@@ -182,12 +185,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _OnTapSignUp() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SignUpScreen(),
-      ),
-    );
+    Navigator.pushReplacementNamed(context, SignUpScreen.name);
   }
 
   void _clearTextFields() {

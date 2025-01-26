@@ -28,19 +28,21 @@ class _SplashScreenState extends State<SplashScreen> {
     await AuthController.getAccessToken();
     if (AuthController.isloggedIn()) {
       await AuthController.getUserData();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MainBottomNavbarScreen(),
-        ),
-      );
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => const MainBottomNavbarScreen(),
+      //   ),
+      // );
+      Navigator.pushReplacementNamed(context, MainBottomNavbarScreen.name);
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SignInScreen(),
-        ),
-      );
+      Navigator.pushReplacementNamed(context, SignInScreen.name);
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => const SignInScreen(),
+      //   ),
+      // );
     }
   }
 
