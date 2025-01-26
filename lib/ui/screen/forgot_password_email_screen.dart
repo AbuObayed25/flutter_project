@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:practice_2/ui/utility/app_Colors.dart';
 import 'package:practice_2/ui/widgets/screen_background.dart';
 import 'forgot_password_otp_screen.dart';
 
 class ForgotPasswordEmailAddress extends StatefulWidget {
   const ForgotPasswordEmailAddress({super.key});
+  static const String name='/forgotpass-email-screen';
 
   @override
   State<ForgotPasswordEmailAddress> createState() =>
@@ -104,12 +106,13 @@ class _ForgotPasswordEmailAddressState
   }
 
   void _OnTapNextButton() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ForgotPasswordOTPScreen(),
-      ),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => const ForgotPasswordOTPScreen(),
+    //   ),
+    // );
+    Navigator.pushReplacementNamed(context, ForgotPasswordOTPScreen.name);
   }
 
   void _OnTapSignIn() {

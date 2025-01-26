@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:practice_2/ui/screen/reset_password_screen.dart';
 import 'package:practice_2/ui/screen/sign_in_screen.dart';
@@ -8,6 +9,8 @@ import 'package:practice_2/ui/widgets/screen_background.dart';
 
 class ForgotPasswordOTPScreen extends StatefulWidget {
   const ForgotPasswordOTPScreen({super.key});
+
+  static const String name = '/forgotpass-otp-screen';
 
   @override
   State<ForgotPasswordOTPScreen> createState() =>
@@ -118,21 +121,10 @@ class _ForgotPasswordOTPScreenState extends State<ForgotPasswordOTPScreen> {
   }
 
   void _OnTapNextButton() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ResetPasswordScreen(),
-      ),
-    );
+    Navigator.pushNamed(context, ResetPasswordScreen.name);
   }
 
   void _OnTapSignIn() {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SignInScreen(),
-      ),
-          (_) => false,
-    );
+    Get.offAllNamed(SignInScreen.name);
   }
 }

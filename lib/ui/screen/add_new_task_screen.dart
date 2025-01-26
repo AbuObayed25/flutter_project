@@ -9,6 +9,7 @@ import '../../data/utils/urls.dart';
 
 class AddNewTaskScreen extends StatefulWidget {
   const AddNewTaskScreen({super.key});
+  static const String name='/addtask';
 
   @override
   State<AddNewTaskScreen> createState() => _AddNewTaskScreenState();

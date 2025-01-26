@@ -11,6 +11,7 @@ import '../widgets/task_card.dart';
 
 class CancelTaskScreen extends StatefulWidget {
   const CancelTaskScreen({super.key});
+  static const String name='/canceltask';
 
   @override
   State<CancelTaskScreen> createState() => _CancelTaskScreenState();
