@@ -131,12 +131,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void _OnTapForgotPasswordButton() {
     Navigator.pushReplacementNamed(context, ForgotPasswordEmailAddress.name);
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => const ForgotPasswordEmailAddress(),
-    //   ),
-    // );
   }
 
   Widget _buildSignUpSection() {
@@ -171,13 +165,6 @@ class _SignInScreenState extends State<SignInScreen> {
     final bool result = await signInController.signIn(
         _emailTEController.text.trim(), _passwordTEController.text);
     if (result) {
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => const MainBottomNavbarScreen(),
-      //   ),
-      //   (value) => false,
-      // );
       Get.offAllNamed(MainBottomNavbarScreen.name);
     } else {
       showSnackBarMessage(context, signInController.errorMessage!, true);
